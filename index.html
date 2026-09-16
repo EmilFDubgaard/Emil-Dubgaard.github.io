@@ -1,0 +1,491 @@
+<!DOCTYPE html>
+<html lang="da">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Emil Fabricius Dubgaard – Portfolio</title>
+<meta name="description" content="Portfolio for Emil Fabricius Dubgaard, Økonomi & IT-studerende på Erhvervsakademi København.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700&family=Source+Sans+3:wght@400;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#EDF1F5; --surface:#FFFFFF; --ink:#172433; --muted:#566575;
+  --line:#C9D3DD; --accent:#1F6FB2; --signal:#E8A317; --soft:#DDE7F1;
+  --display:"Bricolage Grotesque", "Segoe UI", system-ui, sans-serif;
+  --body:"Source Sans 3", "Segoe UI", system-ui, sans-serif;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#101923; --surface:#18232F; --ink:#E6EDF4; --muted:#9AA9B8;
+    --line:#2C3A48; --accent:#6BB0EA; --signal:#F2B93B; --soft:#1F2F40;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#101923; --surface:#18232F; --ink:#E6EDF4; --muted:#9AA9B8;
+  --line:#2C3A48; --accent:#6BB0EA; --signal:#F2B93B; --soft:#1F2F40;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+@media (prefers-reduced-motion: reduce){html{scroll-behavior:auto}*{transition:none!important}}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--body);font-size:1.0625rem;line-height:1.6}
+a{color:var(--accent)}
+:focus-visible{outline:3px solid var(--signal);outline-offset:3px;border-radius:4px}
+.wrap{max-width:1040px;margin:0 auto;padding:0 1.5rem}
+h1,h2,h3{font-family:var(--display);line-height:1.1;margin:0}
+h1{font-size:clamp(2.4rem,6vw,4.2rem);font-weight:700;letter-spacing:-.02em}
+h2{font-size:clamp(1.6rem,3vw,2.2rem);font-weight:700;letter-spacing:-.01em}
+h3{font-size:1.3rem;font-weight:700}
+p{margin:.5rem 0;max-width:68ch}
+
+/* Top */
+header.top{padding:1.25rem 0;border-bottom:1px solid var(--line)}
+header.top .wrap{display:flex;justify-content:space-between;align-items:center;gap:1rem;flex-wrap:wrap}
+header.top nav a{margin-left:1.25rem;text-decoration:none;color:var(--ink);font-weight:600}
+header.top nav a:hover{color:var(--accent)}
+.brand{font-family:var(--display);font-weight:700;text-decoration:none;color:var(--ink)}
+
+/* Hero */
+.hero{padding:4rem 0 2.5rem}
+.hero .lede{font-size:1.3rem;color:var(--muted);margin-top:1rem;max-width:40ch}
+
+/* Flow */
+.flow-intro{margin:2.5rem 0 .75rem;color:var(--muted)}
+.flow{display:flex;align-items:stretch;gap:0;overflow-x:auto;padding:.5rem 0 1rem}
+.node{flex:1 1 0;min-width:170px;background:var(--surface);border:2px solid var(--line);border-radius:14px;
+  padding:1rem 1.1rem;text-align:left;font:inherit;color:inherit;cursor:pointer;transition:border-color .2s,background .2s}
+.node:hover{border-color:var(--accent)}
+.node[aria-pressed="true"]{border-color:var(--accent);background:var(--soft)}
+.node strong{display:block;font-family:var(--display);font-size:1.15rem}
+.node span{display:block;color:var(--muted);font-size:.95rem;margin-top:.25rem}
+.node em{display:block;font-style:normal;font-size:.85rem;color:var(--accent);margin-top:.6rem;font-weight:600}
+.arrow{flex:0 0 36px;display:flex;align-items:center;justify-content:center}
+.arrow svg{width:36px;height:20px}
+.arrow path{stroke:var(--signal);stroke-width:2.5;fill:none}
+.start,.end{flex:0 0 22px;display:flex;align-items:center;justify-content:center}
+.start i,.end i{display:block;width:18px;height:18px;border-radius:50%;border:2px solid var(--ink)}
+.end i{border-width:5px}
+.flow-status{min-height:1.6em;color:var(--muted);font-size:.95rem}
+.flow-status button{font:inherit;background:none;border:0;color:var(--accent);text-decoration:underline;cursor:pointer;padding:0}
+
+/* Projects */
+section{padding:3rem 0}
+.section-head p{color:var(--muted)}
+.projects{display:grid;gap:1rem;margin-top:1.75rem}
+.project{background:var(--surface);border:1px solid var(--line);border-radius:10px;transition:opacity .25s}
+.project.dim{opacity:.35}
+.project.featured{border:2px solid var(--accent)}
+.project summary{list-style:none;cursor:pointer;padding:1.25rem 1.4rem;display:grid;grid-template-columns:1fr auto;gap:.25rem 1rem;align-items:start}
+.project summary::-webkit-details-marker{display:none}
+.project .meta{color:var(--muted);font-size:.9rem}
+.project .teaser{grid-column:1/-1;margin:.35rem 0 0;color:var(--ink)}
+.toggle{font-family:var(--display);font-size:1.6rem;line-height:1;color:var(--accent);transition:transform .2s}
+.project[open] .toggle{transform:rotate(45deg)}
+.featured .flag{display:inline-block;background:var(--signal);color:#1a1300;font-size:.8rem;font-weight:600;border-radius:4px;padding:.1rem .45rem;margin-bottom:.4rem}
+.body{padding:0 1.4rem 1.4rem;border-top:1px solid var(--line)}
+.body dl{display:grid;grid-template-columns:150px 1fr;gap:.9rem 1.5rem;margin:1.25rem 0 0}
+.body dt{font-weight:600;color:var(--muted)}
+.body dd{margin:0;max-width:68ch}
+.body ul{margin:.25rem 0;padding-left:1.1rem}
+.tools{display:flex;flex-wrap:wrap;gap:.4rem;margin-top:.2rem}
+.tools li{list-style:none;background:var(--soft);border-radius:4px;padding:.1rem .5rem;font-size:.9rem}
+.tools{padding:0}
+.focus{border-left:3px solid var(--signal);padding-left:.75rem}
+.figure{font-family:var(--display);font-size:1.5rem;font-weight:700;color:var(--accent)}
+
+/* Other projects */
+.others{margin-top:1.5rem;border-top:1px solid var(--line)}
+.others div{display:grid;grid-template-columns:200px 1fr;gap:1rem;padding:.85rem 0;border-bottom:1px solid var(--line)}
+.others b{font-family:var(--display)}
+.others span{color:var(--muted)}
+
+/* About */
+.about{display:grid;grid-template-columns:1.2fr 1fr;gap:2.5rem;margin-top:1.5rem}
+.about h3{margin-bottom:.5rem}
+.jobs{margin:0;padding:0;list-style:none}
+.jobs li{padding:.5rem 0;border-bottom:1px solid var(--line)}
+.jobs small{display:block;color:var(--muted)}
+.skills-list{columns:2;padding-left:1.1rem;margin:.5rem 0}
+
+/* Contact */
+.contact{background:var(--ink);color:var(--bg);border-radius:16px;padding:2.5rem;margin:1rem 0 3rem}
+.contact h2{color:var(--bg)}
+.contact a{color:var(--signal);font-size:1.25rem;font-weight:600}
+footer{padding:0 0 2rem;color:var(--muted);font-size:.9rem}
+
+@media (max-width:760px){
+  .flow{flex-direction:column}
+  .arrow{transform:rotate(90deg);height:30px}
+  .start,.end{height:26px}
+  .body dl{grid-template-columns:1fr;gap:.2rem}
+  .body dd{margin-bottom:.8rem}
+  .others div{grid-template-columns:1fr;gap:.1rem}
+  .about{grid-template-columns:1fr}
+  header.top nav a{margin:0 1rem 0 0}
+}
+</style>
+</head>
+<body>
+
+<header class="top">
+  <div class="wrap">
+    <a class="brand" href="#">Emil Fabricius Dubgaard</a>
+    <nav aria-label="Hovedmenu">
+      <a href="#projekter">Projekter</a>
+      <a href="#om">Om mig</a>
+      <a href="#kontakt">Kontakt</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+  <div class="wrap hero">
+    <h1>Jeg kortlægger processen, regner på den og automatiserer den.</h1>
+    <p class="lede">Økonomi &amp; IT-studerende på Erhvervsakademi København, 4. semester. Her er de projekter, jeg har lavet med virksomheder som Røde Kors, Norlys, Politiken og ista.</p>
+
+    <p class="flow-intro">Sådan arbejder jeg. Vælg et trin for at se de projekter, hvor jeg har brugt det.</p>
+    <div class="flow" role="group" aria-label="Filtrér projekter efter kompetence">
+      <div class="start" aria-hidden="true"><i></i></div>
+      <div class="arrow" aria-hidden="true"><svg viewBox="0 0 36 20"><path d="M2 10h28M24 4l6 6-6 6"/></svg></div>
+      <button class="node" data-skill="proces" aria-pressed="false">
+        <strong>Kortlæg</strong><span>BPMN og procesanalyse</span><em></em>
+      </button>
+      <div class="arrow" aria-hidden="true"><svg viewBox="0 0 36 20"><path d="M2 10h28M24 4l6 6-6 6"/></svg></div>
+      <button class="node" data-skill="okonomi" aria-pressed="false">
+        <strong>Regn på det</strong><span>Budget og cost-benefit</span><em></em>
+      </button>
+      <div class="arrow" aria-hidden="true"><svg viewBox="0 0 36 20"><path d="M2 10h28M24 4l6 6-6 6"/></svg></div>
+      <button class="node" data-skill="automatisering" aria-pressed="false">
+        <strong>Automatisér</strong><span>Power Apps og Power Automate</span><em></em>
+      </button>
+      <div class="arrow" aria-hidden="true"><svg viewBox="0 0 36 20"><path d="M2 10h28M24 4l6 6-6 6"/></svg></div>
+      <button class="node" data-skill="data" aria-pressed="false">
+        <strong>Følg data</strong><span>Dataflow og integrationer</span><em></em>
+      </button>
+      <div class="arrow" aria-hidden="true"><svg viewBox="0 0 36 20"><path d="M2 10h28M24 4l6 6-6 6"/></svg></div>
+      <div class="end" aria-hidden="true"><i></i></div>
+    </div>
+    <p class="flow-status" aria-live="polite"></p>
+  </div>
+
+  <section id="projekter">
+    <div class="wrap">
+      <div class="section-head">
+        <h2>Udvalgte projekter</h2>
+        <p>Alle projekter er lavet i grupper på 5–6 studerende i samarbejde med rigtige virksomheder. Jeg har været med i alle faser. Under hvert projekt står de dele, jeg især har arbejdet med.</p>
+      </div>
+
+      <div class="projects">
+
+        <details class="project featured" data-skills="proces automatisering data">
+          <summary>
+            <div>
+              <span class="flag">Fremhævet projekt</span>
+              <h3>Røde Kors: salgsoverblik til frivillige butikker</h3>
+              <div class="meta">3. semester, 2026</div>
+            </div>
+            <span class="toggle" aria-hidden="true">+</span>
+            <p class="teaser">En app i Power Apps, der automatisk henter webshopdata fra Shopify og viser de frivillige, hvordan deres butik sælger.</p>
+          </summary>
+          <div class="body">
+            <dl>
+              <dt>Udfordringen</dt>
+              <dd>Røde Kors' webshop omsætter for over 2,4 mio. kr. om året, men de 267 butikker kunne kun se deres samlede månedsomsætning. De vidste ikke, hvilke varer der solgte bedst, og kunne ikke sammenligne sig med hinanden.</dd>
+              <dt>Det gjorde vi</dt>
+              <dd>
+                <ul>
+                  <li>Kortlagde den nuværende webshopproces fra donation til levering i BPMN og fandt, hvor den skaber værdi og spild.</li>
+                  <li>Tegnede dataflowet før og efter løsningen (DFD as-is og to-be).</li>
+                  <li>Byggede et Power Automate-flow, der henter salgsdata fra Shopify, og en app i Power Apps, hvor man vælger butik og periode og ser omsætning, antal solgte varer, diagrammer og bestsellere.</li>
+                  <li>Planlagde kvalitetssikring med rollebaseret adgang, validering af data mod Shopify og brugertest med frivillige.</li>
+                </ul>
+              </dd>
+              <dt>Mit fokus</dt>
+              <dd class="focus">BPMN-analysen, dataflowdiagrammerne og selve løsningen i Power Automate og Power Apps.</dd>
+              <dt>Resultat</dt>
+              <dd>En fungerende løsning, som vi demonstrerede for Røde Kors. Den gør rå salgstal til et overblik, som frivillige uden teknisk baggrund kan bruge.</dd>
+              <dt>Værktøjer</dt>
+              <dd><ul class="tools"><li>Power Apps</li><li>Power Automate</li><li>Shopify</li><li>BPMN</li><li>DFD</li></ul></dd>
+            </dl>
+          </div>
+        </details>
+
+        <details class="project" data-skills="data automatisering proces">
+          <summary>
+            <div>
+              <h3>ista: AI-agent til montører</h3>
+              <div class="meta">4. semester, 2026 (igangværende)</div>
+            </div>
+            <span class="toggle" aria-hidden="true">+</span>
+            <p class="teaser">Et koncept for en AI-agent, der giver montører stemmestyret vejledning, men kun ud fra godkendt dokumentation.</p>
+          </summary>
+          <div class="body">
+            <dl>
+              <dt>Udfordringen</dt>
+              <dd>ista's tekniske viden ligger spredt i dokumentation, og montørerne har brug for den rigtige vejledning, mens de står med opgaven, gerne uden at bruge hænderne.</dd>
+              <dt>Det gjorde vi</dt>
+              <dd>
+                <ul>
+                  <li>Analyserede ista's forretningsmodel og hvor langt de er fra digitalisering til egentlig digital transformation.</li>
+                  <li>Designede et dataflow: godkendte manualer i SharePoint, et revisionsmodul med version og ejer, en Copilot-agent der svarer montøren, og et dashboard med brug og feedback.</li>
+                  <li>Byggede en kontrolmekanisme ind, hvor uklare spørgsmål sendes videre til en fagperson (human-in-the-loop).</li>
+                  <li>Afgrænsede prototypen til én målertype og ét installationsflow.</li>
+                </ul>
+              </dd>
+              <dt>Mit fokus</dt>
+              <dd class="focus">Dataflowet fra dokumentation til agent og dashboard.</dd>
+              <dt>Resultat</dt>
+              <dd>Et afgrænset koncept med klare hypoteser, som prototypen skal teste i næste fase.</dd>
+              <dt>Værktøjer</dt>
+              <dd><ul class="tools"><li>Microsoft Copilot</li><li>SharePoint</li><li>Power Platform</li><li>Digital transformation</li></ul></dd>
+            </dl>
+          </div>
+        </details>
+
+        <details class="project" data-skills="okonomi data">
+          <summary>
+            <div>
+              <h3>Norlys: trivselsværktøj til sælgere</h3>
+              <div class="meta">3. semester, 2026</div>
+            </div>
+            <span class="toggle" aria-hidden="true">+</span>
+            <p class="teaser">Business case, budget og klikbar prototype for et værktøj, der fanger stress hos butikssælgere tidligt.</p>
+          </summary>
+          <div class="body">
+            <dl>
+              <dt>Udfordringen</dt>
+              <dd>Sælgerne hos Norlys arbejder i op til fem systemer pr. kunde. Det gør salget langsomt og skaber stress, og der fandtes ikke et værktøj til at følge trivslen løbende.</dd>
+              <dt>Det gjorde vi</dt>
+              <dd>
+                <ul>
+                  <li>Designede en tilføjelse, der kan indlejres uden at røre Norlys' igangværende systemintegration: daglig trivselsevaluering, salgsråd, kontakt til kolleger og besked til lederen ved stress.</li>
+                  <li>Lagde et budget for udvikling, GDPR-rådgivning, kurser, pilottest og drift.</li>
+                  <li>Beregnede, hvad én stresssygemelding koster pr. måned i sygedagpenge og tabt salg.</li>
+                  <li>Byggede en klikbar prototype i Figma og pitchede løsningen.</li>
+                </ul>
+              </dd>
+              <dt>Mit fokus</dt>
+              <dd class="focus">Budgettet og beregningen af, hvad stress koster virksomheden.</dd>
+              <dt>Resultat</dt>
+              <dd>
+                <span class="figure">443.500 kr.</span> i engangsinvestering og ca. 39.000 kr. om året i drift, sat over for et estimeret tab på 109.460 kr. for hver måned en sælger er sygemeldt med stress.
+                <p><a href="https://www.figma.com/make/HFHq8ewulT1woyNLW4thdr/Internal-Employee-Dashboard?t=bOvrMjmUNNlj8elH-20&amp;fullscreen=1&amp;preview-route=%2Fwellbeing" target="_blank" rel="noopener">Se prototypen i Figma</a></p>
+              </dd>
+              <dt>Værktøjer</dt>
+              <dd><ul class="tools"><li>Business case</li><li>Budgettering</li><li>Figma</li><li>Supabase</li><li>GDPR/DPIA</li></ul></dd>
+            </dl>
+          </div>
+        </details>
+
+        <details class="project" data-skills="okonomi proces">
+          <summary>
+            <div>
+              <h3>Satair: hurtigere svar på supporthenvendelser</h3>
+              <div class="meta">2. semester, 2025</div>
+            </div>
+            <span class="toggle" aria-hidden="true">+</span>
+            <p class="teaser">Cost-benefit-analyse af en feedbackløsning til et flyreservedelsfirma med over 1.000 supporthenvendelser om dagen.</p>
+          </summary>
+          <div class="body">
+            <dl>
+              <dt>Udfordringen</dt>
+              <dd>Mange af Satairs supporthenvendelser manglede vigtige oplysninger. Det gav forsinkelser, også når et fly stod stille på jorden og ventede på en reservedel.</dd>
+              <dt>Det gjorde vi</dt>
+              <dd>
+                <ul>
+                  <li>Sammenlignede en integreret kontaktformular med Hotjar-surveys og valgte formularen, fordi den giver bedre data og kobler direkte til Freshdesk.</li>
+                  <li>Lavede en cost-benefit-analyse ved forskellige grader af forbedring.</li>
+                  <li>Planlagde udviklingen med en work breakdown structure.</li>
+                </ul>
+              </dd>
+              <dt>Mit fokus</dt>
+              <dd class="focus">Cost-benefit-analysen.</dd>
+              <dt>Resultat</dt>
+              <dd><span class="figure">184,8 % ROI</span> ved blot 2 % forbedring, og over 2.000 % ved 15 %. Løsningen blev ikke afprøvet i praksis, så tallene er estimater.</dd>
+              <dt>Værktøjer</dt>
+              <dd><ul class="tools"><li>Cost-benefit-analyse</li><li>WBS</li><li>Freshdesk</li><li>Hotjar</li></ul></dd>
+            </dl>
+          </div>
+        </details>
+
+        <details class="project" data-skills="data">
+          <summary>
+            <div>
+              <h3>Politiken Pulse: yngre læsere og digital modenhed</h3>
+              <div class="meta">3. semester, 2026</div>
+            </div>
+            <span class="toggle" aria-hidden="true">+</span>
+            <p class="teaser">To konsulentrapporter og en modenhedsanalyse for JP/Politikens Hus om at tiltrække 18–25-årige som abonnenter.</p>
+          </summary>
+          <div class="body">
+            <dl>
+              <dt>Udfordringen</dt>
+              <dd>Unge mangler hverken interesse for nyheder eller betalingsvilje, men Politikens digitale tilbud matcher ikke deres forventninger til fællesskab, personalisering og anonymitet.</dd>
+              <dt>Det gjorde vi</dt>
+              <dd>
+                <ul>
+                  <li>Vurderede Politikens modenhed inden for data og analytics med Kræmmergaards modenhedstrappe og placerede dem i generation 4.</li>
+                  <li>Udviklede Politiken Pulse, et debat- og communityunivers på Politiken.dk, gennem en Design Thinking-proces.</li>
+                  <li>Lavede skærmbilleder i Figma Make og beskrev, hvordan konceptet kan bygge på Politikens eksisterende datainfrastruktur.</li>
+                  <li>Analyserede implementering og drift i den nye organisation efter omstruktureringen i 2026.</li>
+                </ul>
+              </dd>
+              <dt>Resultat</dt>
+              <dd>En anbefaling om, at den største opgave er at bygge en ny brugeroplevelse oven på eksisterende systemer, ikke at bygge datafundamentet fra bunden.</dd>
+              <dt>Værktøjer</dt>
+              <dd><ul class="tools"><li>Design Thinking</li><li>Kræmmergaards modenhedstrappe</li><li>Figma Make</li><li>Konsulentrapport</li></ul></dd>
+            </dl>
+          </div>
+        </details>
+
+        <details class="project" data-skills="data">
+          <summary>
+            <div>
+              <h3>Peytz: integration efter et opkøb</h3>
+              <div class="meta">2. semester, 2025</div>
+            </div>
+            <span class="toggle" aria-hidden="true">+</span>
+            <p class="teaser">Analyse af, hvordan Peytz kan blive en del af iO, og en teknisk test af integration til Jira.</p>
+          </summary>
+          <div class="body">
+            <dl>
+              <dt>Udfordringen</dt>
+              <dd>Efter opkøbet havde Peytz spredte systemer, kulturforskelle og en integration, der var sat på pause. Det skabte usikkerhed blandt medarbejderne.</dd>
+              <dt>Det gjorde vi</dt>
+              <dd>
+                <ul>
+                  <li>Fandt organisatoriske skævheder med McKinsey 7S.</li>
+                  <li>Vurderede videndeling med Knowledge Management Maturity Model.</li>
+                  <li>Brugte Kotters 8 trin til at vurdere forandringsprocessen.</li>
+                  <li>Testede API-kald til Jira i Postman som proof of concept.</li>
+                </ul>
+              </dd>
+              <dt>Resultat</dt>
+              <dd>Integrationen var teknisk mulig. De største barrierer var organisatoriske: styring, fælles platforme, dokumentationsstandarder og kommunikation.</dd>
+              <dt>Værktøjer</dt>
+              <dd><ul class="tools"><li>Postman</li><li>Jira API</li><li>McKinsey 7S</li><li>KMMM</li><li>Kotter</li></ul></dd>
+            </dl>
+          </div>
+        </details>
+
+        <details class="project" data-skills="">
+          <summary>
+            <div>
+              <h3>DR Daglig: hackathon</h3>
+              <div class="meta">3. semester, 2026</div>
+            </div>
+            <span class="toggle" aria-hidden="true">+</span>
+            <p class="teaser">Et koncept, der skal gøre DR til en daglig digital vane for unge, udviklet under tidspres.</p>
+          </summary>
+          <div class="body">
+            <dl>
+              <dt>Udfordringen</dt>
+              <dd>DR vil nå halvdelen af danskerne digitalt hver dag, men når ikke de unge på de platforme, de bruger dagligt.</dd>
+              <dt>Det gjorde vi</dt>
+              <dd>
+                <ul>
+                  <li>Valgte 15–24-årige, der sjældent bruger DR, som primær målgruppe.</li>
+                  <li>Udviklede DR Daglig: korte, personaliserede klip, en daglig notifikation og en vej fra TikTok og Instagram ind til DR's egne platforme.</li>
+                  <li>Beskrev brugerrejsen og koblede konceptet til DR's tre strategiske mål med konkrete KPI'er.</li>
+                </ul>
+              </dd>
+              <dt>Værktøjer</dt>
+              <dd><ul class="tools"><li>Brugerrejse</li><li>Målgruppeanalyse</li><li>KPI'er</li></ul></dd>
+            </dl>
+          </div>
+        </details>
+
+      </div>
+
+      <h3 style="margin-top:3rem">Øvrige projekter</h3>
+      <div class="others">
+        <div><b>Nemlig.com</b><span>Digital proces for erstatningsvarer, der balancerer omkostninger og kundetilfredshed. 2. semester.</span></div>
+        <div><b>IKEA</b><span>Hvordan IKEA Danmark kan skalere Buy Back &amp; Resell med cirkulær forretningsmodelinnovation. 2. semester.</span></div>
+        <div><b>LEGO</b><span>Strategisk analyse af LEGO og legetøjsbranchen med PESTEL, Porters five forces og SWOT. 1. semester.</span></div>
+        <div><b>GUBI</b><span>App-koncept med målgruppeanalyse, value proposition og agil projektledelse. 1. semester.</span></div>
+        <div><b>DigitalLead</b><span>Danmarks muligheder for grøn softwareudvikling set gennem Porters diamant og Triple Helix. 1. semester.</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="om">
+    <div class="wrap">
+      <h2>Om mig</h2>
+      <div class="about">
+        <div>
+          <p>Jeg læser Økonomi &amp; IT på Erhvervsakademi København og søger praktik og studiejob inden for økonomi, data eller IT.</p>
+          <p>Ved siden af studiet har jeg flere års erfaring med kundeservice, salg og administration. Det har lært mig at forstå, hvad folk faktisk har brug for, før man bygger en løsning til dem.</p>
+          <h3 style="margin-top:1.5rem">Kompetencer</h3>
+          <ul class="skills-list">
+            <li>Excel</li><li>SQL</li><li>Power BI</li><li>Power Automate</li>
+            <li>Power Apps</li><li>HTML &amp; CSS</li><li>C (grundlæggende)</li><li>BPMN</li>
+          </ul>
+          <h3 style="margin-top:1.5rem">Sprog</h3>
+          <p>Dansk (modersmål), engelsk og tysk (professionelt niveau)</p>
+        </div>
+        <div>
+          <h3>Erfaring</h3>
+          <ul class="jobs">
+            <li>Dypång Management<small>2024–2026. Administration, koordinering og kundekontakt</small></li>
+            <li>Nielsens Herretøj<small>2024. Salg, kunderådgivning og lageransvar</small></li>
+            <li>Hvidbjerg Strand Feriepark<small>2023. Reception, booking og kasseansvar</small></li>
+            <li>Tøjeksperten<small>2021–2022. Salg og kunderådgivning</small></li>
+            <li>Bilka og Hvidbjerg Strand Feriepark<small>2019–2021. Service og kundehåndtering</small></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="wrap" id="kontakt">
+    <div class="contact">
+      <h2>Søger du en praktikant eller studentermedhjælper?</h2>
+      <p>Skriv til mig, så sender jeg gerne mit CV.</p>
+      <p><a href="mailto:Emil.Dubgaard@live.dk">Emil.Dubgaard@live.dk</a></p>
+    </div>
+  </div>
+</main>
+
+<footer><div class="wrap">Emil Fabricius Dubgaard, 2026</div></footer>
+
+<script>
+(function(){
+  const nodes = [...document.querySelectorAll('.node')];
+  const projects = [...document.querySelectorAll('.project')];
+  const status = document.querySelector('.flow-status');
+  const names = {proces:'Kortlæg', okonomi:'Regn på det', automatisering:'Automatisér', data:'Følg data'};
+
+  nodes.forEach(n => {
+    const count = projects.filter(p => p.dataset.skills.split(' ').includes(n.dataset.skill)).length;
+    n.querySelector('em').textContent = count + (count === 1 ? ' projekt' : ' projekter');
+  });
+
+  function reset(){
+    nodes.forEach(n => n.setAttribute('aria-pressed','false'));
+    projects.forEach(p => p.classList.remove('dim'));
+    status.textContent = '';
+  }
+
+  nodes.forEach(n => n.addEventListener('click', () => {
+    const active = n.getAttribute('aria-pressed') === 'true';
+    reset();
+    if (active) return;
+    n.setAttribute('aria-pressed','true');
+    const skill = n.dataset.skill;
+    let first = null;
+    projects.forEach(p => {
+      const match = p.dataset.skills.split(' ').includes(skill);
+      p.classList.toggle('dim', !match);
+      if (match && !first) first = p;
+    });
+    status.textContent = 'Viser projekter under "' + names[skill] + '". ';
+    const b = document.createElement('button');
+    b.textContent = 'Vis alle';
+    b.addEventListener('click', reset);
+    status.appendChild(b);
+    if (first) first.scrollIntoView({behavior: matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth', block:'center'});
+  }));
+})();
+</script>
+</body>
+</html>
